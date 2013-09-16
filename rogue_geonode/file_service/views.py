@@ -1,6 +1,9 @@
-import httplib2
+import json
+from geonode.documents.views import document_download, document_upload
+from geonode.documents.models import Document
 from django.contrib.auth import authenticate
 from django.http import HttpResponse
+from django.shortcuts import get_list_or_404
 from django.views.generic import View
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
@@ -15,7 +18,6 @@ class BasicAuthView(View):
     A mixin that requires the user to be logged in or logs in the user with basic auth, if the appropriate headers are
     present, before rendering the response.
     """
-
     unauthenticated_response = HttpResponse("Unauthorized, please authenticate.", status=401)
 
     def dispatch(self, *args, **kwargs):
@@ -39,38 +41,34 @@ class BasicAuthView(View):
 
 class GetImage(BasicAuthView):
     """
-    Proxies GET requests to the file-service application requiring authentication along the way.
+    Allows the user to download a document when providing the document's name.
     """
     http_method_names = ['get']
 
     def get(self, request, *args, **kwargs):
-        redirect_url = "http://127.0.0.1:8080/file-service/services/document/download?blobKey={0}".format(kwargs.get('key'))
-        http = httplib2.Http()
-        response, content = http.request(redirect_url, "GET")
+        title = kwargs.get('key')
+        doc_id = get_list_or_404(Document, title=title)
+        return document_download(request, doc_id[0].id)
 
-        return HttpResponse(
-            content=content,
-            status=response.status,
-            mimetype=response.get("content-type", "text/plain"))
 
-class UploadImage(BasicAuthView):
+class ImageUpload(BasicAuthView):
     """
-    Proxies POST requests to the file-service application requiring authentication along the way.
+    Allows users to upload documents using basic auth.
     """
-    http_method_names = ['post']
 
-    def post(self, *args, **kwargs):
-        http = httplib2.Http()
-        url = "http://127.0.0.1:8080/file-service/services/document/upload"
+    default_permissions = json.dumps(dict(authenticated="document_readwrite", users=list()))
 
-        headers = dict((header, value) for header, value
-            in self.request.META.items() if header.startswith('HTTP_'))
+    def get(self, request, *args, **kwargs):
+        return document_upload(request)
 
-        headers['CONTENT-TYPE'] = self.request.META.get('CONTENT_TYPE', '')
-        headers['HOST'] = '127.0.0.1'
-        response, content = http.request(url, body=self.request.body, method='POST', headers=headers)
-        return HttpResponse(content=content, status=response.status, mimetype=response.get("content-type", "text/plain"))
+    def post(self, request, *args, **kwargs):
+        # Add the default permissions to the POST if they are missing.
+        if not request.POST.get('permissions'):
+            request.POST = request.POST.copy()
+            request.POST.update(permissions=self.default_permissions)
+
+        return document_upload(request)
 
     @method_decorator(csrf_exempt)
     def dispatch(self, *args, **kwargs):
-        return super(UploadImage, self).dispatch(*args, **kwargs)
+        return super(ImageUpload, self).dispatch(*args, **kwargs)
