@@ -188,7 +188,8 @@ INSTALLED_APPS = (
     'geonode.catalogue',
     'geonode.documents',
     'geonode.social',
-    'rogue_geonode.file_service'
+    'rogue_geonode.file_service',
+    'maploom'
 )
 
 LOGGING = {
