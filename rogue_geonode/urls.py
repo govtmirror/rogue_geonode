@@ -32,6 +32,8 @@ urlpatterns = patterns('',
 
     # Map views
     (r'^maps/', include('geonode.maps.urls')),
+    url(r'^maploom/map/new','geonode.maps.views.new_map',{'template':'maps/maploom.html'}, name='maploom-map-new'),
+    url(r'^maploom/map/(?P<mapid>\d+)/view','geonode.maps.views.map_view',{'template':'maps/maploom.html'}, name='maploom-map-view'),
 
     # Catalogue views
     (r'^catalogue/', include('geonode.catalogue.urls')),
