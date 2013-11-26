@@ -531,53 +531,19 @@ PYCSW = {
 # GeoNode javascript client configuration
 
 MAP_BASELAYERS = [{
-    "source": {
-        "ptype": "gxp_wmscsource",
-        "url": OGC_SERVER['default']['LOCATION'] + "wms",
-        "restUrl": "/gs/rest"
-     }
-  },{
-    "source": {"ptype": "gxp_olsource"},
-    "type":"OpenLayers.Layer",
-    "args":["No background"],
-    "visibility": False,
-    "fixed": True,
-    "group":"background"
-  }, {
-    "source": {"ptype": "gxp_olsource"},
-    "type":"OpenLayers.Layer.OSM",
-    "args":["OpenStreetMap"],
-    "visibility": False,
-    "fixed": True,
-    "group":"background"
-  }, {
-    "source": {"ptype": "gxp_mapquestsource"},
-    "name":"osm",
-    "group":"background",
-    "visibility": True
-  }, {
-    "source": {"ptype": "gxp_mapquestsource"},
-    "name":"naip",
-    "group":"background",
-    "visibility": False
-  },{
-    "source": {"ptype": "gxp_mapboxsource"},
-  }, {
-    "source": {"ptype": "gxp_olsource"},
-    "type":"OpenLayers.Layer.WMS",
-    "group":"background",
-    "visibility": False,
-    "fixed": True,
-    "args":[
-      "bluemarble",
-      "http://maps.opengeo.org/geowebcache/service/wms",
-      {
-        "layers":["bluemarble"],
-        "format":"image/png",
-        "tiled": True,
-        "tilesOrigin": [-20037508.34, -20037508.34]
-      },
-      {"buffer": 0}
-    ]
-
-}]
+   "source": {
+       "ptype": "gxp_wmscsource",
+       "url": OGC_SERVER['default']['LOCATION'] + "wms",
+       "restUrl": "/gs/rest"
+    }
+ }, {
+   "source": {"ptype": "gxp_olsource", "baseParams": {"SERVICE":"WMS"}, "name":"OpenStreetMap", "url":"fakeURL"},
+   "type":"OpenLayers.Layer.OSM",
+   "name":"OpenStreetMap",
+   "title":"OpenStreetMap",
+   "args":["OpenStreetMap"],
+   "visibility": False,
+   "fixed": True,
+   "group":"background"
+ }
+]
