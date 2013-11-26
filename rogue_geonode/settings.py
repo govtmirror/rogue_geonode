@@ -534,7 +534,8 @@ MAP_BASELAYERS = [{
    "source": {
        "ptype": "gxp_wmscsource",
        "url": OGC_SERVER['default']['LOCATION'] + "wms",
-       "restUrl": "/gs/rest"
+       "restUrl": "/gs/rest",
+       "name": "local geoserver"
     }
  }, {
    "source": {"ptype": "gxp_olsource", "baseParams": {"SERVICE":"WMS"}, "name":"OpenStreetMap", "url":"fakeURL"},
