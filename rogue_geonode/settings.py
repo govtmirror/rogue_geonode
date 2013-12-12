@@ -538,13 +538,14 @@ MAP_BASELAYERS = [{
        "name": "local geoserver"
     }
  }, {
-   "source": {"ptype": "gxp_olsource", "baseParams": {"SERVICE":"WMS"}, "name":"OpenStreetMap", "url":"fakeURL"},
+   "source": {"ptype": "gxp_osmsource", "name":"OpenStreetMap"},
    "type":"OpenLayers.Layer.OSM",
-   "name":"OpenStreetMap",
+   "name":"mapnik",
    "title":"OpenStreetMap",
    "args":["OpenStreetMap"],
-   "visibility": False,
+   "visibility": True,
    "fixed": True,
    "group":"background"
  }
 ]
+
