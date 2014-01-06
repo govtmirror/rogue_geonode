@@ -74,7 +74,7 @@ urlpatterns = patterns('',
     (r'^i18n/', include('django.conf.urls.i18n')),
     (r'^admin/', include(admin.site.urls)),
     (r'^file-service/', include('rogue_geonode.file_service.urls')),
-
+    (r'^proxy/', 'rogue_geonode.views.proxy'),
     )
 
 #Documents views
