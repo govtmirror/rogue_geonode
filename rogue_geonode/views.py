@@ -1,9 +1,12 @@
 import logging
+from django.contrib.auth import authenticate
 from django.conf import settings
 from django.http import HttpResponse
 from django.http.request import validate_host
 from django.utils.http import is_safe_url
-from geonode.utils import ogc_server_settings
+from django.utils.translation import ugettext as _
+from django.utils import simplejson as json
+from geonode.utils import ogc_server_settings, _get_basic_auth_info
 from httplib import HTTPConnection
 from urlparse import urlsplit
 
@@ -71,3 +74,38 @@ def proxy(request):
                                                                                     'realm="{0} '.format(url.hostname))
 
     return response
+
+def resolve_user(request):
+
+    user = None
+    geoserver = False
+    superuser = False
+    acl_user = request.user
+    if 'HTTP_AUTHORIZATION' in request.META:
+        username, password = _get_basic_auth_info(request)
+        acl_user = authenticate(username=username, password=password)
+        if acl_user:
+            user = acl_user.username
+            superuser = acl_user.is_superuser
+        elif _get_basic_auth_info(request) == ogc_server_settings.credentials:
+            geoserver = True
+            superuser = True
+        else:
+            return HttpResponse(_("Bad HTTP Authorization Credentials."),
+                                status=401,
+                                mimetype="text/plain")
+
+    if not any([user, geoserver, superuser]) and not request.user.is_anonymous():
+        user = request.user.username
+        superuser = request.user.is_superuser
+
+    resp = {
+        'user': user,
+        'geoserver': geoserver,
+        'superuser': superuser,
+    }
+
+    if acl_user and acl_user.is_authenticated():
+        resp['fullname'] = acl_user.profile.name
+        resp['email'] = acl_user.profile.email
+    return HttpResponse(json.dumps(resp))
