@@ -12,6 +12,7 @@
 {% maploom_js %}
 
 <script type="text/javascript">
+{% get_current_language as language %}
  config =  {
        authStatus: {% if user.is_authenticated %} 200{% else %} 401{% endif %},
         username: {% if user.is_authenticated %} "{{ user.username }}" {% else %} undefined {% endif %},
