@@ -546,16 +546,6 @@ MAP_BASELAYERS = [{
    "visibility": True,
    "fixed": True,
    "group":"background"
- },
- {
- "source":{"ptype":"gxp_bingsource"},
- "name": "AerialWithLabels",
- "visibility": False,
- },
- {
- "source":{"ptype":"gxp_googlesource"},
- "name":"HYBRID",
- "visibility": False
  }
 ]
 
