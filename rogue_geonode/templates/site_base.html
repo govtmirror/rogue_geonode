@@ -1,6 +1,14 @@
 {% extends "base.html" %}
+
+{% load classification_banner %}
+
 {% block extra_head %}
       <link href="{{ STATIC_URL }}css/site_base.css" rel="stylesheet"/>
 {% endblock %}
-{% block social %}
+{% block header %}
+    {% if classification_banner_enabled %}
+        <link href="{{ STATIC_URL }}lib/css/django_classification_banner_overrides.css" rel="stylesheet"/>
+        {% classification_banner %}
+    {% endif %}
+    {{ block.super }}
 {% endblock %}
