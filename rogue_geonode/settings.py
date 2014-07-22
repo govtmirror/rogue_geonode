@@ -102,7 +102,6 @@ INSTALLED_APPS = (
     'rogue_geonode.core',
     'django_classification_banner',
     'maploom',
-    'south'
 ) + INSTALLED_APPS
 
 LOGGING = {
