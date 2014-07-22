@@ -7,13 +7,8 @@ from geonode.settings import *  # noqa
 
 SITENAME = 'rogue_geonode'
 
-# Defines the directory that contains the settings file as the PROJECT_ROOT
-# It is used for relative settings elsewhere.
-PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
-GEONODE_ROOT = os.path.abspath(os.path.dirname(geonode.__file__))
+LOCAL_ROOT = os.path.abspath(os.path.dirname(__file__))
 
-# Setting debug to true makes Django serve static media and
-# present pretty error pages.
 ALLOWED_HOSTS = ()
 CACHE_TIME = 0
 CLASSIFICATION_BANNER_ENABLED = False
@@ -25,10 +20,6 @@ SOCIAL_BUTTONS = False
 
 # Set to True to load non-minified versions of (static) client dependencies
 DEBUG_STATIC = False
-
-# This is needed for integration tests, they require
-# geonode to be listening for GeoServer auth requests.
-
 
 # Defines settings for development
 DATABASES = {
@@ -84,37 +75,20 @@ UPLOADER = {
     }
 }
 
-# Local time zone for this installation. Choices can be found here:
-# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
-# although not all choices may be available on all operating systems.
-# If running in a Windows environment this must be set to the same as your
-# system time zone.
-TIME_ZONE = 'America/Chicago'
-
-# Language code for this installation. All choices can be found here:
-# http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en'
-
 WSGI_APPLICATION = "rogue_geonode.wsgi.application"
 
-# Additional directories which hold static files
-STATICFILES_DIRS = [
-    os.path.join(PROJECT_ROOT, "static"),
-    os.path.join(GEONODE_ROOT, "static"),
-]
 
-# Note that Django automatically includes the "templates" dir in all the
-# INSTALLED_APPS, se there is no need to add maps/templates or admin/templates
-TEMPLATE_DIRS = (
-    os.path.join(PROJECT_ROOT, "templates"),
-    os.path.join(GEONODE_ROOT, "templates"),
-)
-
-# Location of translation files
 LOCALE_PATHS = (
-    os.path.join(PROJECT_ROOT, "locale"),
-    os.path.join(GEONODE_ROOT, "locale"),
+    os.path.join(LOCAL_ROOT, 'locale'),
+) + LOCALE_PATHS
+
+STATICFILES_DIRS.append(
+    os.path.join(LOCAL_ROOT, "static"),
 )
+
+TEMPLATE_DIRS = (
+    os.path.join(LOCAL_ROOT, "templates"),
+) + TEMPLATE_DIRS
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'x-#u&4x2k*$0-60fywnm5&^+&a!pd-ajrx(z@twth%i7^+oskh'
@@ -122,15 +96,13 @@ SECRET_KEY = 'x-#u&4x2k*$0-60fywnm5&^+&a!pd-ajrx(z@twth%i7^+oskh'
 # Location of url mappings
 ROOT_URLCONF = 'rogue_geonode.urls'
 
-MAX_DOCUMENT_SIZE = 2  # MB
-
-
 INSTALLED_APPS = (
     'geonode.contrib.geogit',
     'rogue_geonode.file_service',
     'rogue_geonode.core',
     'django_classification_banner',
     'maploom',
+    'south'
 ) + INSTALLED_APPS
 
 LOGGING = {
@@ -229,6 +201,34 @@ MAP_BASELAYERS = [
         "group":"background"
     }
 ]
+
+
+
+LEAFLET_CONFIG = {
+    'TILES': [
+        # Find tiles at:
+        # http://leaflet-extras.github.io/leaflet-providers/preview/
+
+
+        ('Basemap',
+         'https://{s}.tiles.mapbox.com/v3/examples.map-i87786ca/{z}/{x}/{y}.png',
+         '<a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; \
+          <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, \
+          <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'),
+        ('OpenStreetMap HOT',
+         'http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
+         'Map tiles by <a href="http://hot.openstreetmap.org">Humanitarian OpenStreetMap Team</a>, \
+         <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; \
+         <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, \
+         <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'),
+    ],
+    'PLUGINS': {
+        'esri-leaflet': {
+            'js': 'lib/js/esri-leaflet.js',
+            'auto-include': True,
+        },
+    }
+}
 
 
 # Load more settings from a file called local_settings.py if it exists
