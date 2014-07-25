@@ -235,3 +235,24 @@ try:
     from local_settings import *  # noqa
 except ImportError:
     pass
+
+MAP_BASELAYERS = [
+    {
+        "source": {
+            "ptype": "gxp_wmscsource",
+            "url": OGC_SERVER['default']['LOCATION'] + "wms",
+            "restUrl": "/gs/rest",
+            "name": "local geoserver"
+        }
+    },
+    {
+        "source": {"ptype": "gxp_osmsource", "name": "OpenStreetMap"},
+        "type": "OpenLayers.Layer.OSM",
+        "name": "mapnik",
+        "title": "OpenStreetMap",
+        "args": ["OpenStreetMap"],
+        "visibility": True,
+        "fixed": True,
+        "group":"background"
+    }
+]
