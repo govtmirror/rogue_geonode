@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.utils.translation import ugettext as _
+from rogue_geonode import get_version
 
 
 def security_warnings(request, PROXY_ALLOWED_HOSTS=()):
@@ -14,3 +15,9 @@ def security_warnings(request, PROXY_ALLOWED_HOSTS=()):
                              description=_('A wildcard is included in the PROXY_ALLOWED_HOSTS setting.')))
 
     return dict(warnings=warnings)
+
+
+def rogue(request):
+    """ Returns the rogue_geonode version """
+
+    return dict(VERSION=get_version())

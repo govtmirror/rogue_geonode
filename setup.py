@@ -61,7 +61,7 @@ docs_requires = [
 
 setup(
     name="rogue_geonode",
-    version="0.1.1",
+    version=__import__('rogue_geonode').get_version(),
     author="LMN Solutions",
     author_email="rogue@lmnsolutions.com",
     description="rogue_geonode, based on GeoNode",

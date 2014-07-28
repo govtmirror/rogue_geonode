@@ -170,7 +170,8 @@ LOGGING = {
 
 TEMPLATE_CONTEXT_PROCESSORS += (
     'django_classification_banner.context_processors.classification',
-    'rogue_geonode.core.context_processors.security_warnings'
+    'rogue_geonode.core.context_processors.security_warnings',
+    'rogue_geonode.core.context_processors.rogue'
 )
 
 # Add additional paths (as regular expressions) that don't require authentication.

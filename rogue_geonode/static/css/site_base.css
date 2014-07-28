@@ -77,3 +77,6 @@ input[id^="id_"] {
 .select2-container {
   width: 250px;
 }
+.small-text {
+  font-size: 13px;
+}
