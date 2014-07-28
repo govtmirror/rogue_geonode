@@ -2,9 +2,19 @@
 @footer_size: 100px;
 @text: 14px;
 @small-text: @text - 1;
+@navbar-logo: '../img/logo.png';
 
 html, body {
     height: 100%;
+}
+
+.navbar-brand {
+  background: url(@navbar-logo) no-repeat;
+  margin-top: 10px;
+  overflow: hidden;
+  text-indent: -9999em;
+  width: 140px;
+  height: 30px;
 }
 
 .footer {
@@ -37,7 +47,7 @@ nav.filter h4 a.toggle{
   padding: 40px;
   border-bottom: 1px solid #cccccc;
   box-shadow: 0 0 10px rgba(0,0,0,.35);
-  background: url('../fire_background.png') no-repeat left bottom;
+  background: url('../img/fire_background.png') no-repeat left bottom;
   background-size: 100%;
 
   h1 {

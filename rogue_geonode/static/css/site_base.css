@@ -2,6 +2,14 @@ html,
 body {
   height: 100%;
 }
+.navbar-brand {
+  background: url('../img/logo.png') no-repeat;
+  margin-top: 10px;
+  overflow: hidden;
+  text-indent: -9999em;
+  width: 140px;
+  height: 30px;
+}
 .footer {
   border-top: 1px solid #cccccc;
   height: 100px;
@@ -27,7 +35,7 @@ nav.filter h4 a.toggle {
   padding: 40px;
   border-bottom: 1px solid #cccccc;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.35);
-  background: url('../fire_background.png') no-repeat left bottom;
+  background: url('../img/fire_background.png') no-repeat left bottom;
   background-size: 100%;
 }
 .jumbotron h1 {
