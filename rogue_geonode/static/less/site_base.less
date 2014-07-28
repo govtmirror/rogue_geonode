@@ -56,14 +56,6 @@ nav.filter h4 a.toggle{
 
 }
 
-span[id^="error_"].help-inline {
-  color: @brand-danger;
-}
-
-input[id^="id_"] {
-  min-width: 300px;
-}
-
 .alert{
   color: @brand-danger;
 }
@@ -78,7 +70,6 @@ color: #333;
 white-space: nowrap;
 }
 
-// Upstream
 .dropdown-menu form {
   padding: inherit;
 }
@@ -119,3 +110,22 @@ white-space: nowrap;
 .small-text {
   font-size: @small-text;
 }
+
+.user-avatar img {
+  border-radius: 3px;
+}
+
+/* Hacks */
+input[value='Invite User'] {
+  margin-top: 10px;
+}
+
+span[id^="error_"].help-inline {
+  color: @brand-danger;
+}
+
+input[id^="id_"] {
+  min-width: 300px;
+}
+
+/* End Hacks */
