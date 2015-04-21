@@ -58,6 +58,13 @@ nav.filter h4 a.toggle {
 .jumbotron h1 {
   font-weight: 600;
 }
+.jumbotron a {
+  color: rgb(2, 139, 175);
+  text-decoration: none;
+}
+.jumbotron a:hover {
+  text-decoration: underline;
+}
 .dropdown-menu > li a {
   display: block;
   padding: 3px 20px;

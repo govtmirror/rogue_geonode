@@ -1,0 +1,24 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% block title %} {% trans "RFI GeoNode / About / API" %} — {{ block.super }} {% endblock %}
+
+{% block body %}
+  <div class="page-header">
+    <h2><a href="/"><i class="fa fa-retweet fa-6"></i>RFI GeoNode</a> / <a href="{% url "about"%}">About</a> / <a href="{% url "about_api" %}">API</a></h2>
+  </div>
+  <p>The RFI GeoNode (or Request for Imagery/Information GeoNode) is a digital service provided by the U.S. Department of State, <a href="https://hiu.state.gov" target="_blank">Humanitarian Information Unit (HIU)</a> to coordinate and validate requests by interagency and external partners to the U.S. Government for imagery and information.</p>
+
+  <h4>Users / GIS Analysts</h4>
+  <p>Users and GIS analysts can connect to the RFI GeoNode via QGIS, ArcMap, and TileMill.  In QGIS, users can add RFI GeoNode layers as WMS or WFS layers.  See the <a href="/docs/qgis.html">QGIS page</a> in the documentation for more detail.  In ArcMap, use the interoperability extension to add a WMS layer to ArcCatalog.  All the layers should then be available.  In TileMill, simply grab the download url from each respective layer page and use it as the path.</p>
+
+
+  <h4>Developers</h4>
+  <p>Developers can interact with the State GeoNode through 3 APIs: CSW, OGC Services, and the internal GeoNode API.</p>
+
+  <p>RFI GeoNode uses <a href="http://pycsw.org/">PyCSW</a> to produce standardized CSW metadata services.</p>  The CSW endpoint is: <a href="/catalogue/csw">/catalogue/csw</a>.  To retrieve metadata records run something like this: <a href="/catalogue/csw?request=GetRecords&service=CSW&version=2.0.2&resultType=results&maxRecords=1000&elementsetname=full&typenames=csw:Record&outputschema=http://www.isotc211.org/2005/gmd">/catalogue/csw?request=GetRecords&service=CSW&version=2.0.2&resultType=results&maxRecords=1000&elementsetname=full&typenames=csw:Record&outputschema=http://www.isotc211.org/2005/gmd</a>.  This endpoint can be used by other systems to automatically harvest records from the RFI GeoNode.</p>
+
+  <p>All layers in the RFI GeoNode are accessible via OGC Services.  The WMS Capabilities document is accessible with: <a href="/geoserver/wms?SERVICE=WMS&REQUEST=GetCapabilities">/geoserver/wms?SERVICE=WMS&REQUEST=GetCapabilities</a>.  This endpoint can be used by geospatial analysts to pull layers directly into their desktop environment (<a href="/docs/integration.html">/docs/integration.html</a>).  OGC services can also be used to pull layers directly from the RFI GeoNode into web maps to make mashups.</p>
+
+
+{% endblock %}

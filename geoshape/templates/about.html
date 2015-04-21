@@ -1,12 +1,23 @@
 {% extends "site_base.html" %}
 
 {% load i18n %}
-{% block title %} {% trans "About RFI GeoNode" %} — {{ block.super }} {% endblock %}
+{% block title %} {% trans "RFI GeoNode / About" %} — {{ block.super }} {% endblock %}
 
 {% block body %}
   <div class="page-header">
-    <h2>About RFI GeoNode</h2>
+    <h2><a href="/"><i class="fa fa-retweet fa-6"></i>RFI GeoNode</a> / <a href="{% url "about"%}">About</a></h2>
   </div>
   <p>The RFI GeoNode (or Request for Imagery/Information GeoNode) is a digital service provided by the U.S. Department of State, <a href="https://hiu.state.gov" target="_blank">Humanitarian Information Unit (HIU)</a> to coordinate and validate requests by interagency and external partners to the U.S. Government for imagery and information.</p>
+
+  <p>MapGive / Imagery to the Crowd is a flagship initiative of the U.S. Department of State's <a href="http://www.state.gov/documents/organization/231006.pdf">Open Government Plan</a>.  Through the Imagery to the Crowd (IttC), HIU provides high-resolution commercial satellite imagery services in a format that the volunteer mapping community can use to create open geographic data.</p>
+
+  <h4>Recent Activity</h4>
+  <div style="margin-left:20px;">View a list of recent activity, including new layers or maps on the <a href="{% url "recent-activity" %}">Recent Activity page</a>.</div>
+  <br>
+  <h4>API</h4>
+  <div style="margin-left:20px;">Lean more about API access on the <a href="{% url "about_api" %}">API page</a>.</div>
+  <br>
+  <h4>Related Sites</h4>
+  <div style="margin-left:20px;"><a href="http://mapgive.state.gov/">MapGive</a> | <a href="http://mapgive.state.gov/ittc/">Imagery to the Crowd (IttC)</a> | <a href="http://www.state.gov/documents/organization/231006.pdf">State Department Open Government Plan</a></div>
 
 {% endblock %}

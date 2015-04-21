@@ -1,11 +1,13 @@
-from django.conf.urls import patterns, include
+from django.conf.urls import patterns, include, url
+from django.views.generic import TemplateView
 from geonode.urls import urlpatterns as geonode_url_patterns
 from maploom.geonode.urls import urlpatterns as maploom_urls
 
 urlpatterns = patterns('',
                        (r'^file-service/', include('geoshape.file_service.urls')),
                        (r'^proxy/', 'geoshape.views.proxy'),
-                       (r'^security/', 'geoshape.views.security'),
+                       url(r'^security/', TemplateView.as_view(template_name='security.html'), name='security'),
+                       url(r'^robots.txt$', TemplateView.as_view(template_name='robots.txt', content_type='text/plain'), name='robots_txt'),
                        )
 
 urlpatterns += geonode_url_patterns

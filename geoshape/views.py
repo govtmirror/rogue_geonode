@@ -80,7 +80,3 @@ def proxy(request):
         response['www-authenticate'] = "GeoNode"
 
     return response
-
-
-def security(request, template='security.html'):
-    return render_to_response(template, RequestContext(request, {}))
