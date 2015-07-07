@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.views.generic import TemplateView
 from geonode.urls import urlpatterns as geonode_url_patterns
 from maploom.geonode.urls import urlpatterns as maploom_urls
-from tilebundler.api import TilesetResource
+#from tilebundler.api import TilesetResource
 
 #tileset_resource = TilesetResource()
 
