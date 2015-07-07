@@ -1,5 +1,10 @@
 import os
-from distutils.core import setup
+try:
+    from setuptools import setup
+except ImportError:
+    from distutils.core import setup
+#from distutils.core import setup
+
 from distutils.command.install import INSTALL_SCHEMES
 
 def read(*rnames):
@@ -49,6 +54,7 @@ install_requires = [
         "django-classification-banner>=0.1.4",
         "django-maploom==1.2.1",
         "psycopg2==2.4.5"
+        #"django-tilebundler==0.1-alpha2"
 ]
 
 tests_requires = [
@@ -66,7 +72,7 @@ setup(
     author="LMN Solutions",
     author_email="rogue@lmnsolutions.com",
     description="geoshape, based on GeoNode",
-    long_description=(read('README.md')),
+    #long_description=(read('README.md')),
     classifiers=[
         'Development Status :: 5 - Production/Stable',
     ],
