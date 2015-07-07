@@ -89,6 +89,7 @@ INSTALLED_APPS = (
     'geoshape.core',
     'django_classification_banner',
     'maploom',
+    'tilebundler'
 ) + INSTALLED_APPS
 
 LOGGING = {
@@ -163,7 +164,7 @@ TEMPLATE_CONTEXT_PROCESSORS += (
 )
 
 # Add additional paths (as regular expressions) that don't require authentication.
-AUTH_EXEMPT_URLS = ('/file-service/*', '/i18n/setlang/',)
+AUTH_EXEMPT_URLS = ('/file-service/*', '/i18n/setlang/', '/api/tileset/*')
 
 if LOCKDOWN_GEONODE:
     MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES + ('geonode.security.middleware.LoginRequiredMiddleware',)
@@ -243,3 +244,8 @@ MAP_BASELAYERS = [
         "group":"background"
     }
 ]
+
+TILEBUNDLER_CONFIG = {
+    'tileset_dir': '/var/lib/geoserver_data/tilebundler-store'
+}
+
