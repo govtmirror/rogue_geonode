@@ -46,6 +46,7 @@ OGC_SERVER = {
         'WMST_ENABLED': False,
         'BACKEND_WRITE_ENABLED': True,
         'WPS_ENABLED': True,
+        'GEOSERVER_DATA_DIR': '/var/lib/geoserver_data',
         'GEOGIT_DATASTORE_DIR': '/var/lib/geoserver_data/geogit',
         # Set to name of database in DATABASES dictionary to enable
         'DATASTORE': '',  # 'datastore',
@@ -85,11 +86,13 @@ ROOT_URLCONF = 'geoshape.urls'
 
 INSTALLED_APPS = (
     'geonode.contrib.geogig',
+    'geonode.contrib.slack',
     'geoshape.file_service',
     'geoshape.core',
     'django_classification_banner',
     'maploom',
     #'tilebundler'
+    'gsschema'
 ) + INSTALLED_APPS
 
 LOGGING = {
@@ -164,7 +167,7 @@ TEMPLATE_CONTEXT_PROCESSORS += (
 )
 
 # Add additional paths (as regular expressions) that don't require authentication.
-AUTH_EXEMPT_URLS = ('/file-service/*', '/i18n/setlang/', '/api/tileset/*')
+AUTH_EXEMPT_URLS = ('/file-service/*', '/i18n/setlang/', '/api/tileset/*', '/gsschema/*',)
 
 if LOCKDOWN_GEONODE:
     MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES + ('geonode.security.middleware.LoginRequiredMiddleware',)
@@ -217,6 +220,16 @@ LEAFLET_CONFIG = {
     }
 }
 
+# Absolute filesystem path to the directory that will be used to upload/download schema.xsd files through gsschema app
+GSSCHEMA_CONFIG = {
+    'gsschema_dir': '/var/lib/geoserver_data/'
+}
+
+# where to save tilebundler tilesets. Should move this to  OGC_SERVER['default']['TILEBUNDLER_DATASTORE_DIR']
+# TILEBUNDLER_CONFIG = {
+#    'tileset_dir': '/var/lib/geoserver_data/tilebundler-store'
+# }
+
 
 # Load more settings from a file called local_settings.py if it exists
 try:
@@ -244,8 +257,3 @@ MAP_BASELAYERS = [
         "group":"background"
     }
 ]
-
-#TILEBUNDLER_CONFIG = {
-#    'tileset_dir': '/var/lib/geoserver_data/tilebundler-store'
-#}
-
