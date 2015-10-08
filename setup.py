@@ -52,10 +52,11 @@ for dirpath, dirnames, filenames in os.walk(walk_dir):
 install_requires = [
         "geoshape-geonode==1.3.1",
         "django-classification-banner>=0.1.4",
-        "django-maploom==1.2.8",
+        "django-maploom==1.2.9",
         "psycopg2==2.4.5",
         #"django-tilebundler==0.1-beta1"
-        "django-gsschema==0.1-beta2"
+        "django-gsschema==0.1-beta2",
+        "django-cors-headers>=1.1.0",
 ]
 
 tests_requires = [
