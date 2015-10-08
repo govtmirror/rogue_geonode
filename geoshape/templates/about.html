@@ -1,13 +1,13 @@
 {% extends "site_base.html" %}
 
 {% load i18n %}
-{% block title %} {% trans "RFI GeoNode / About" %} — {{ block.super }} {% endblock %}
+{% block title %} {% trans "PEPFAR GeoNode / About" %} — {{ block.super }} {% endblock %}
 
 {% block body %}
   <div class="page-header">
-    <h2><a href="/"><i class="fa fa-retweet fa-6"></i>RFI GeoNode</a> / <a href="{% url "about"%}">About</a></h2>
+    <h2><a href="/"><img src="{{ STATIC_URL }}img/pepfar_logo_seal.png" width="90" height="109"/>PEPFAR GeoNode</a> / <a href="{% url "about"%}">About</a></h2>
   </div>
-  <p>The RFI GeoNode (or Request for Imagery/Information GeoNode) is a digital service provided by the U.S. Department of State, <a href="https://hiu.state.gov" target="_blank">Humanitarian Information Unit (HIU)</a> to coordinate and validate requests by interagency and external partners to the U.S. Government for imagery and information.</p>
+  <p>The PEFPAR GeoNode is a digital service provided by the U.S. Department of State, <a href="https://hiu.state.gov" target="_blank">Humanitarian Information Unit (HIU)</a> to support interagency collaboration for the development and maintenance of PEPFAR's spatial data.</p>
 
   <p>MapGive / Imagery to the Crowd is a flagship initiative of the U.S. Department of State's <a href="http://www.state.gov/documents/organization/231006.pdf">Open Government Plan</a>.  Through the Imagery to the Crowd (IttC), HIU provides high-resolution commercial satellite imagery services in a format that the volunteer mapping community can use to create open geographic data.</p>
 
@@ -18,6 +18,6 @@
   <div style="margin-left:20px;">Lean more about API access on the <a href="{% url "about_api" %}">API page</a>.</div>
   <br>
   <h4>Related Sites</h4>
-  <div style="margin-left:20px;"><a href="http://mapgive.state.gov/">MapGive</a> | <a href="http://mapgive.state.gov/ittc/">Imagery to the Crowd (IttC)</a> | <a href="http://www.state.gov/documents/organization/231006.pdf">State Department Open Government Plan</a></div>
+  <div style="margin-left:20px;"><a href="http://www.pepfar.gov/index.htm">PEPFAR</a> | <a href="https://hiu.state.gov/">HIU</a> | <a href="http://www.state.gov/documents/organization/231006.pdf">State Department Open Government Plan</a></div>
 
 {% endblock %}
