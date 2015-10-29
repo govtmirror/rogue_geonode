@@ -52,18 +52,26 @@ nav.filter h4 a.toggle {
   padding: 40px;
   border-bottom: 1px solid #cccccc;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.35);
-  background: url('../img/pepfar_geonode_banner.png') no-repeat left bottom;
+  background: url('../img/pepfar_geonode_banner.jpg') no-repeat left bottom;
   background-size: cover;
+  color: black;
 }
 .jumbotron h1 {
   font-weight: 600;
 }
 .jumbotron a {
-  color: rgb(2, 139, 175);
+  /* color: rgb(2, 139, 175);*/
+  color: black;
   text-decoration: none;
 }
 .jumbotron a:hover {
   text-decoration: underline;
+}
+.jumbotron p {
+  box-shadow: 10px 10px 5px rgb(136, 136, 136);
+  background-color: rgb(245, 245, 245);
+  font-weight: bold;
+  padding: 4px;
 }
 .dropdown-menu > li a {
   display: block;

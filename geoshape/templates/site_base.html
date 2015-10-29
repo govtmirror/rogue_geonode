@@ -14,9 +14,6 @@
 
 {% block tabs %}
   <!-- Overrides https://github.com/GeoNode/geonode/blob/master/geonode/templates/base.html#L53 -->
-  <li id="nav_rfis">
-    <a href="{% url "layer_browse" %}?keywords__slug__in=rfi">{% trans "RFIs" %}</a>
-  </li>
   <li id="nav_layers">
     <a href="{% url "layer_browse" %}">{% trans "Layers" %}</a>
   </li>
